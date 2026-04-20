@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #F59E0B;
+  --color-primary-dark: #D97706;
+  --color-secondary: #3B82F6;
+  --color-app-bg: #FFFBEB;
+  --color-app-text: #451A03;
+}
+
+@theme {
+  --font-sans: "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary);
+  --color-app-bg: var(--color-app-bg);
+  --color-app-text: var(--color-app-text);
+}
+
+body {
+  @apply bg-app-bg text-app-text antialiased transition-colors duration-500;
+}
+
+/* Custom Tactical Buttons */
+.btn-tactile {
+  @apply transition-all duration-100 active:translate-y-1 active:shadow-none;
+}
+
+.shadow-tactile {
+  box-shadow: 0 4px 0 var(--color-primary-dark);
+}
+
+.shadow-tactile-active {
+  box-shadow: 0 2px 0 var(--color-primary-dark);
+}
+
+/* Custom Scrollbar for the Vibrant theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-app-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full border-2 border-app-bg hover:bg-primary/40;
+}
+
+/* Card Styles */
+.vibrant-card {
+  @apply bg-white rounded-[32px] border-2 border-primary/10 shadow-xl shadow-primary/5;
+}

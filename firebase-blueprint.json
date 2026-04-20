@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user profile information, experience points, level info, and customization items.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "accountId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "xp": { "type": "integer" },
+        "level": { "type": "integer" },
+        "title": { "type": "string" },
+        "titles": { "type": "array", "items": { "type": "string" } },
+        "currentIcon": { "type": "string" },
+        "purchasedIcons": { "type": "array", "items": { "type": "string" } },
+        "currentColor": { "type": "string" },
+        "purchasedColors": { "type": "array", "items": { "type": "string" } },
+        "isPrivate": { "type": "boolean" },
+        "totalFocusTime": { "type": "integer", "description": "Total focus time in seconds" },
+        "totalQuizzesSolved": { "type": "integer" },
+        "achievements": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "xp", "level"]
+    },
+    "StudyLog": {
+      "title": "Study Log",
+      "description": "Records of individual study sessions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "duration": { "type": "integer", "description": "Seconds focused" },
+        "quizzesSolved": { "type": "integer" },
+        "type": { "type": "string", "enum": ["work", "break"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "duration", "quizzesSolved", "timestamp"]
+    },
+    "TimelinePost": {
+      "title": "Timeline Post",
+      "description": "Activity feed items.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "duration": { "type": "integer" },
+            "quizzes": { "type": "integer" }
+          }
+        },
+        "reactions": { "type": "integer" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "content", "timestamp"]
+    },
+    "Follow": {
+      "title": "User Following",
+      "description": "Tracks who follows whom.",
+      "type": "object",
+      "properties": {
+        "followerId": { "type": "string" },
+        "followingId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["followerId", "followingId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    },
+    "/studyLogs/{logId}": {
+      "schema": "StudyLog",
+      "description": "Study logs for analytics."
+    },
+    "/timeline/{postId}": {
+      "schema": "TimelinePost",
+      "description": "Public activity feed."
+    },
+    "/follows/{followId}": {
+      "schema": "Follow",
+      "description": "Social graph."
+    }
+  }
+}
